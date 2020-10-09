@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+    <meta charset="utf-8">
+
+    <head>
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="Bitcoin Price.css"/>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      </script>
+
+      <title>ChainLink Market Cap Exercise</title>
+
+    </head>
+
+
+  <body>
+
+    <script>
+
+    //$3,529,678,639
+
+    let currentTime = 1601501537;
+    console.log(currentTime);
+
+    let timeMinusDay = currentTime - 86400;
+    console.log(timeMinusDay);
+
+      let BASE_URL = "https://api.coingecko.com/api/v3/";
+      let CHAINLINK_PRICE_ENDPOINT = "/simple/price?ids=chainlink&vs_currencies=usd";
+      let CHAINLINK_MARKET_CAP_24H_CHANGE = "coins/chainlink/market_chart/range?vs_currency=usd&from=" + timeMinusDay + "&to=" + currentTime ;
+      let COINS_ENDPOINT = "/coins/list";
+      let chainlinkPriceUrl = BASE_URL + CHAINLINK_PRICE_ENDPOINT;
+      let chainlinkMarketCapChangeUrl = BASE_URL + CHAINLINK_MARKET_CAP_24H_CHANGE;
+      console.log(chainlinkMarketCapChangeUrl);
+
+      fetch(chainlinkPriceUrl)
+      .then(function(res){
+
+        res.json().then(function(data){
+          console.log(data);
+          $("#coinPrice").html("Chainlink price is $" + data.chainlink.usd);
+        })
+      })
+
+      fetch(chainlinkMarketCapChangeUrl)
+
+      .then(function(res){
+
+        res.json().then(function(data){
+          console.log(data);
+          let x = `${data.market_caps[20][1]}`
+          let y = `${data.market_caps[20][0] - data.market_caps[0][0]}`
+          let z = "red"
+          if (y > 0) z = "green"
+
+          $("#marketCap").html("Chainlink Market Cap is $" + data.market_caps[20][1]).css("color", z);
+        })
+      })
+
+
+    </script>
+
+  <div class="row row-margin-100">
+  </div>
+      <div class="row row-margin-100">
+        <h1 id="coinPrice" class="rounded mx-auto d-block"></h1>
+      </div>
+      <div class="row row-margin-100" align="center">
+        <h1 id="marketCap" class="rounded mx-auto d-block"></h1>
+      </div>
+    </div>
+  </body>
+
+  </html>

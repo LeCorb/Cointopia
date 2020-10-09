@@ -1,0 +1,24 @@
+#bantheLogo{
+  align-self: center;
+}
+
+#sideLogos{
+  align-self: center;
+}
+
+#home{
+  margin-top: inherit;
+}
+
+#myTabContent{
+  margin-top: 10px;
+}
+
+#myHeight{
+  min-width: 100px;
+}
+
+#rightMargin{
+  margin-right: 4px;
+  margin-left: 50px;
+}
