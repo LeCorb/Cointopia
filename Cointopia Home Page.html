@@ -1,0 +1,150 @@
+
+  <!DOCTYPE html>
+
+  <html lang="en" dir="ltr">
+
+    <meta charset="utf-8">
+
+  <head>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <title>Cointopia</title>
+
+  </head>
+
+  <body>
+    <script>
+
+      let BASE_URL = "https://api.coingecko.com/api/v3/";
+      let BITCOIN_PRICE_ENDPOINT = "/simple/price?ids=bitcoin&vs_currencies=usd";
+      let COINS_ENDPOINT = "//coins/list";
+      let bitcoinPriceUrl = BASE_URL + BITCOIN_PRICE_ENDPOINT;
+      let allCoinsUrl = BASE_URL+COINS_ENDPOINT;
+
+      fetch(bitcoinPriceUrl)
+      .then(function(res){
+
+        res.json().then(function(data){
+          console.log(data.bitcoin.usd);
+          $("#BTCcoinPrice").html(data.bitcoin.usd);
+        })
+      })
+
+      fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=%201h%2C%2024h%2C%207d")
+      .then(function(res){
+
+        res.json().then(function(data){
+          console.log(data[0]);
+          $("#coinMarket").html("List of data: " + data[0].circulating_supply);
+        })
+      })
+
+    </script>
+       <div class= "row col-11">
+        <div id="bantheLogo" class= "col-lg-4 col-md-4 my-1 mx-auto">
+          <a class="navbar-brand" href="#">
+          <img src="Cointopia Logo.png" alt="Cointopia Logo" width="120" border="0"></a>
+        </div>
+        <div class= "col-lg-6 col-md-6 my-0 m-2"></div>
+        <div class= "col-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-12 ml-5 my-1">
+          <h5 class="display-6">The best cryptocurrency source on the internet</h5>
+        </div>
+        <div class="row">
+         <div class="col-1">
+         </div>
+        </div>
+      </div>
+     <div class= "row">
+        <div class= "col-1" id="myHeight">
+        </div>
+        <div class= "col-11 my-3 ml-5">
+          <ul class="nav nav-tabs" id="cats-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#cats" role="tab" aria-controls="cats" aria-selected="true">Cryptocurrencies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#memes" role="tab" aria-controls="memes" aria-selected="false">Exchanges</a>
+            </li>
+          </ul>
+          <div class="tab-content my-3" id="myTabContent">
+            <div class="tab-pane fade show active" id="cats" role="tabpanel" aria-labelledby="home-tab">Get the latest prices and charts.</div>
+            <div class="tab-pane fade" id="memes" role="tabpanel" aria-labelledby="profile-tab">Exchanges list thousands of cryptocurrencies for purchase and trading.</div>
+          </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+      <table id="tableHeader" class="table ml-5" >
+        <thead>
+          <tr class="d-flex">
+            <th scope="col" id="coinName" class="col-1">#</th>
+            <th scope="col" id="coinName"class="col-2">Coin</th>
+            <th scope="col" id="coinPriceOrder" class="col-1">Price</th>
+            <th scope="col" id="coinPrice1Hr" class="col-1">1h</th>
+            <th scope="col" id="coinPrice24Hr" class="col-1">24hr</th>
+            <th scope="col" id="coinPrice1Hr"  class="col-1">7d</th>
+            <th scope="col" id="coinOrder" class="col-1">24h Volume</th>
+            <th scope="col" id="coinOrder" class="col-2">Mkt Cap</th>
+            <th scope="col" id="coinOrder" class="col-1">Last 7 Days</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr id="bitcoin"  class="d-flex">
+            <th scope="col" class="col-1">1</th>
+            <td scope="col" class="col-2">BTC</td>
+            <td scope="col" class="col-1" id="BTCcoinPrice"></td>
+            <td scope="col" class="col-1">1h</td>
+            <td scope="col" class="col-1">24h</td>
+            <td scope="col" class="col-1">7d</td>
+            <td scope="col" class="col-1">24h Volume</td>
+            <td scope="col" class="col-2">Mkt Cap</td>
+            <td scope="col" class="col-1">Last 7 Days</td>
+          </tr>
+
+          <tr id="ethereum"  class="d-flex">
+            <th scope="col" class="col-1">2</th>
+            <td scope="col" class="col-2">ETH</td>
+            <td scope="col" class="col-1">Price</td>
+            <td scope="col" class="col-1">1h</td>
+            <td scope="col" class="col-1">24h</td>
+            <td scope="col" class="col-1">7d</td>
+            <td scope="col" class="col-1">24h Volume</td>
+            <td scope="col" class="col-2">Mkt Cap</td>
+            <td scope="col" class="col-1">Last 7 Days</td>
+          </tr>
+
+          <tr id="tether"  class="d-flex">
+            <th scope="col" class="col-1">3</th>
+            <td scope="col" class="col-2">USDT</td>
+            <td scope="col" class="col-1">Price</td>
+            <td scope="col" class="col-1">1h</td>
+            <td scope="col" class="col-1">24h</td>
+            <td scope="col" class="col-1">7d</td>
+            <td scope="col" class="col-1">24h Volume</td>
+            <td scope="col" class="col-2">Mkt Cap</td>
+            <td scope="col" class="col-1">Last 7 Days</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
