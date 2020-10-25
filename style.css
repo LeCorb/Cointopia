@@ -2,23 +2,34 @@
   align-self: center;
 }
 
-#sideLogos{
-  align-self: center;
+div {
+  text-align: auto;
 }
 
-#home{
-  margin-top: inherit;
+table {
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 15px;
 }
 
-#myTabContent{
-  margin-top: 10px;
+tr {
+  border: 0px;
 }
 
-#myHeight{
-  min-width: 100px;
+#boldText {
+  font-weight: 900;
+  color: red;
 }
 
-#rightMargin{
-  margin-right: 4px;
-  margin-left: 50px;
+
+p.normal {
+  font-weight: normal;
+}
+
+p.thick {
+  font-weight: bold;
+}
+
+p.thicker {
+  font-weight: 900;
 }
